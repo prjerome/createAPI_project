@@ -1,4 +1,5 @@
- express = require('express');
+const express = require('express');
+const { removeListener } = require('../../server');
 const minionsRouter = express.Router();
 const { getAllFromDatabase, addToDatabase, getFromDatabaseById, updateInstanceInDatabase, deleteFromDatabasebyId } = require('../db');
 
@@ -20,6 +21,7 @@ minionsRouter.get('/', (req, res, next) => {
     next();
 });
 
+//passing test.js line 172
 minionsRouter.post('/', (req, res, next) => {
     res.status(201).send(addToDatabase('minions', req.body));
     next();
@@ -76,7 +78,7 @@ minionsRouter.put('/:minionId', (req, res, next) => {
      updateInstanceInDatabase('minions', '1');
     */
 
-    ///passing test.js line 135 & 147
+    //passing test.js line 135 & 147
    if(typeof req.id === 'number') {
     const toUpdateMinion = updateInstanceInDatabase('minions', req.body);
     if(toUpdateMinion) {
@@ -90,16 +92,23 @@ minionsRouter.put('/:minionId', (req, res, next) => {
 });
 
 minionsRouter.delete('/:minionId', (req, res, next) => {
-    const toDelete = deleteFromDatabasebyId('minions', req.id);
-    if (toDelete) {
+    //attempt to pass test.js line 202
+    /* if (getFromDatabaseById('minions', req.id)) {
+        deleteFromDatabasebyId('minions', req.id);
+            res.send(204);
+    } */
+//passing test.js line 227 & 233
+    if(!req.id || !getFromDatabaseById('minions', req.id)) {
+        res.sendStatus(404);
+    }
+    else if (req.id && getFromDatabaseById('minions', req.id)) {
+        const toDelete = deleteFromDatabasebyId('minions', req.id);
         res.sendStatus(410);
         next();
     }
-    else {
-        res.sendStatus(204);
-    }
 });
 
+//Bonus tasks
 /*minionsRouter.get('/:minionId/work', (req, res, next) => {
 
 }); */
