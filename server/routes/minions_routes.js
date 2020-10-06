@@ -21,6 +21,7 @@ minionsRouter.get('/', (req, res, next) => {
 });
 
 //passing test.js line 172
+//POST request bodies will not have an `id` property, you will have to set it based on the next id in sequence
 minionsRouter.post('/', (req, res, next) => {
     res.status(201).send(addToDatabase('minions', req.body));
     next();
