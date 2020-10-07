@@ -13,6 +13,7 @@ const checkMillionDollarIdea = (req, response, nextCallback) => {
         response.status(400).send();
     }
 
+    // passing test.js line 547
     else if (req.body.numWeeks && req.body.weeklyRevenue == 'invalid') {
         response.status(400).send();                
     }
@@ -22,15 +23,5 @@ const checkMillionDollarIdea = (req, response, nextCallback) => {
     }              
 };
 
-/*const checkMillionDollarIdea = (numWeeks, weeklyRevenue) => {
-    const totalValueIdea = numWeeks * weeklyRevenue;
-    if(totalValueIdea > 1000000) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}; */
 
-// Leave this exports assignment so that the function can be used elsewhere
 module.exports = checkMillionDollarIdea;

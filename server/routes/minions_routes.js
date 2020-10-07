@@ -2,12 +2,15 @@ const express = require('express');
 const minionsRouter = express.Router();
 const { getAllFromDatabase, addToDatabase, getFromDatabaseById, updateInstanceInDatabase, deleteFromDatabasebyId } = require('../db');
 
+//handling of :minionId parameter 
 minionsRouter.param('minionId', (req, res, next, id) => {
-    const minionId = Number(id);
-    if(minionId) {
-        req.id = minionId;
+    //const minionId = Number(id);
+    const minion = getFromDatabaseById('minions', id);
+    if (minion) {
+        req.minion = minion; 
+        req.id = id;
         next();
-    }
+   }
     else {
         res.sendStatus(404);
     }
@@ -29,7 +32,15 @@ minionsRouter.post('/', (req, res, next) => {
 
 
 minionsRouter.get('/:minionId', (req, res, next) => {
-   /* attempt to pass test.js like 52
+      //passing test.js line 41
+    res.status(200).send(req.minion);
+  
+    
+    /*passing test.js line 82
+    else {
+        res.sendStatus(404);
+    } */
+    /* attempt to pass test.js like 52
    const toMatch = {
         id: ''
         name: '',
@@ -37,20 +48,12 @@ minionsRouter.get('/:minionId', (req, res, next) => {
         weaknesses: '',
         salary: '' 
    };*/
-
+/*
   // passing test.js line 76
    if (!req.id || typeof req.id !== 'number') {
     res.sendStatus(404);
-    } 
-        const minionToSend = getFromDatabaseById('minions', req.id);
-        //passing test.js line 41
-        if(minionToSend) {
-            res.send(minionToSend);
-        }
-        //passing test.js line 82
-        else {
-            res.sendStatus(404);
-        }
+    } */
+      
         
 /*attempt to pass test.js line 66
         if(req.id === minionToSend.id) {

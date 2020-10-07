@@ -1,5 +1,6 @@
 const express = require('express');
 const { response } = require('../../server.js');
+const checkMillionDollarIdea = require('../checkMillionDollarIdea.js');
 const ideasRouter = express.Router();
 module.exports = ideasRouter;
 const {getAllFromDatabase, addToDatabase, getFromDatabaseById, updateInstanceInDatabase, deleteFromDatabasebyId} = require ('../db.js');   
@@ -35,8 +36,9 @@ ideasRouter.post('/', (req, res, next) => {
     //passing test.js line 410. This was a fun one!
     const ideasArray = getAllFromDatabase('ideas');
     req.body.id = ideasArray.length + 1;
-    
-    res.status(201).send(addToDatabase('ideas', req.body));
+     if (checkMillionDollarIdea(req.body.numweeks, req.body.weeklyRevenue)) {
+        res.status(201).send(addToDatabase('ideas', req.body));
+     }
 });
 
 //TODO
@@ -73,12 +75,15 @@ ideasRouter.get('/:ideaId', (req, res, next) => {
 });
 
 ideasRouter.put('/:ideaId', (req, res, next) => {
+    if (checkMillionDollarIdea(req.body.numweeks, req.body.weeklyRevenue) 
+        //res.send(updateInstanceInDatabase('ideas', req.body));
+    
     /* attempt passing test.js line 329, 348
     if (req.id) {
        updateInstanceInDatabase('ideas', req.body); 
         next();
     } */
-});
+);
 
 //TODO
 ideasRouter.delete('/:ideaId', (req, res, next) => {
@@ -88,10 +93,7 @@ ideasRouter.delete('/:ideaId', (req, res, next) => {
        if(toDelete) {
            res.status(204).send(toDelete);
        }
-       else {
-        
-       }
-
+    });
      /* attempt at passing test.js 440
     const deleteThisIdea = (deleteFromDatabasebyId('ideas', req.id));
     if (deleteThisIdea) {
@@ -99,6 +101,4 @@ ideasRouter.delete('/:ideaId', (req, res, next) => {
     } */
    
     /* attempt at passing test.js 440
-    deleteFromDatabasebyId('ideas', req.id);
-    */
-});
+deleteFromDatabasebyId('ideas', req.id); */});
