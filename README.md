@@ -1,3 +1,6 @@
+Creating an API using Express.js. This is built as part of the web development course on codecademy.com. See below. Cheers, Pradeep Jerome, 23/10/20
+----------------------------------------------------
+
 # Boss Machine
 
 ## Project Overview
