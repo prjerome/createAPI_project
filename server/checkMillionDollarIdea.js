@@ -1,3 +1,7 @@
+/*
+Custom middleware function checkMillionDollarIdea that will come in handy in some /api/ideas routes. This function will make sure that any new or updated ideas are still worth at least one million dollars! The total value of an idea is the product of its numWeeks and weeklyRevenue properties.
+*/
+
 //passing test.js line 517
 const checkMillionDollarIdea = (req, response, nextCallback) => {
 // passing test.js line 523

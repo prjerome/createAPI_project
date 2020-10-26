@@ -1,3 +1,5 @@
+//datebase logic
+
 const faker = require('faker');
 
 let minionIdCounter = 1;

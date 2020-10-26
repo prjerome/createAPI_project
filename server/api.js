@@ -1,3 +1,5 @@
+// routing setup
+
 const express = require('express');
 const minionsRouter = require('./routes/minions_routes');
 const apiRouter = express.Router();
