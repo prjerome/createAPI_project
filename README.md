@@ -1,4 +1,4 @@
-Creating an API using Express.js and TDD. This is built as part of the web development course on codecademy.com. See below. Cheers, Pradeep Jerome, 23/10/20
+Creating an API using Express.js and TDD (see the tests folder). This is built as part of the web development course on codecademy.com. See below. Cheers, Pradeep Jerome, 23/10/20
 ----------------------------------------------------
 
 # Boss Machine
